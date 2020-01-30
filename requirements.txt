@@ -1,0 +1,6 @@
+flask 
+jsonpickle 
+opencv-python 
+pillow
+matplotlib
+gunicorn==19.9.0

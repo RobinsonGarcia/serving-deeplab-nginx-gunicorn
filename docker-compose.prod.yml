@@ -1,0 +1,26 @@
+version: '3'
+services:
+  web:
+    build: .
+    #image: cormodel/cormodel:latest
+    command: gunicorn --bind 0.0.0.0:5000 server:app
+    expose:
+    - 5000
+    volumes:
+    - /c/Users/Robins/Documents/projeto-segm-360/web_server/static/images/:/workspace/static/images
+    - /c/Users/Robins/Documents/projeto-segm-360/web_server/static/predictions/:/workspace/static/predictions
+    - /c/Users/Robins/Documents/projeto-segm-360/web_server/graph:/workspace/graph
+    environment:
+    - MODEL_PATH=graph/frozen_inference_graph.pb
+    - MODE=prediction
+  nginx:
+    build: services/nginx
+    ports:
+      - 3000:80
+    depends_on:
+      - web
+
+
+#https://testdriven.io/blog/dockerizing-flask-with-postgres-gunicorn-and-nginx/
+
+    

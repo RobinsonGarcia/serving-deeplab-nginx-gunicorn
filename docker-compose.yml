@@ -1,0 +1,14 @@
+version: '3'
+services:
+  web:
+    build: .
+    #image: cormodel/cormodel:latest
+    ports:
+    - "3000:5000"
+    volumes:
+    - /c/Users/Robins/Documents/projeto-segm-360/web_server/static/images/:/workspace/static/images
+    - /c/Users/Robins/Documents/projeto-segm-360/web_server/static/predictions/:/workspace/static/predictions
+    - /c/Users/Robins/Documents/projeto-segm-360/web_server/graph:/workspace/graph
+    environment:
+    - MODEL_PATH=graph/frozen_inference_graph.pb
+    - MODE=prediction
